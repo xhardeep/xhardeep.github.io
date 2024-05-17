@@ -11,7 +11,17 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
+header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-image: url('https://hardeep--singh.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F10df236e-06d6-47a5-9b8e-dfc42f747347%2F386ba134-c9d0-4671-9d66-073bf2a7c424%2Fant-trail.jpg?table=block&id=8ff21295-2f11-4b33-be1e-268c2f2a7d72&spaceId=10df236e-06d6-47a5-9b8e-dfc42f747347&width=1400&userId=&cache=v2'); /* Replace with your image URL */
+    background-size: cover; /* Ensures the image covers the entire header */
+    background-position: center; /* Centers the image in the header */
+    color: white; /* Ensures text is readable over the background image */
+}
 header h1 {
     margin: 0;
 }
