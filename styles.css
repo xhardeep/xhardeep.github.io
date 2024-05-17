@@ -1,0 +1,111 @@
+/* Common styles for both light and dark modes */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+main {
+    padding: 20px;
+}
+
+.blog {
+    margin-bottom: 40px;
+}
+
+.blog p {
+    font-size: 1.1em;
+    line-height: 1.5em;
+}
+
+.blog span {
+    display: block;
+    margin: 10px 0;
+}
+
+.blog a {
+    text-decoration: none;
+}
+
+footer {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+footer a {
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Light mode styles */
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    header h1 {
+        color: #000000;
+    }
+
+    nav a {
+        color: #000000;
+    }
+
+    .blog h2 {
+        color: #000000;
+    }
+
+    .blog a {
+        color: #000000;
+    }
+
+    footer a {
+        color: #000000;
+    }
+}
+
+/* Dark mode styles */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1c1c1c;
+        color: #ffffff;
+    }
+
+    header h1 {
+        color: #ffffff;
+    }
+
+    nav a {
+        color: #ffffff;
+    }
+
+    .blog h2 {
+        color: #ffffff;
+    }
+
+    .blog a {
+        color: #ffffff;
+    }
+
+    footer a {
+        color: #ffffff;
+    }
+}
