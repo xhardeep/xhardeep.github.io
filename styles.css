@@ -11,10 +11,12 @@ header {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    background-image: url('https://hardeep--singh.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F10df236e-06d6-47a5-9b8e-dfc42f747347%2F386ba134-c9d0-4671-9d66-073bf2a7c424%2Fant-trail.jpg?table=block&id=8ff21295-2f11-4b33-be1e-268c2f2a7d72&spaceId=10df236e-06d6-47a5-9b8e-dfc42f747347&width=1400&userId=&cache=v2'); /* Replace with your image URL */
-    background-size: cover; /* Ensures the image covers the entire header */
-    background-position: center; /* Centers the image in the header */
-    color: white; /* Ensures text is readable over the background image */
+    background-image:url('background.png'); 
+    background-size:fixed; 
+    background-position: centre;
+    background-attachment: fixed;
+    color: white;
+    
 }
 header h1 {
     margin: 0;
@@ -33,20 +35,6 @@ main {
     margin-bottom: 40px;
 }
 
-.blog p {
-    font-size: 1.1em;
-    line-height: 1.5em;
-}
-
-.blog span {
-    display: block;
-    margin: 10px 0;
-}
-
-.blog a {
-    text-decoration: none;
-}
-
 footer {
     padding: 20px;
     display: flex;
@@ -61,55 +49,49 @@ footer a {
 /* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: whitesmoke;
+        color :black;
     }
 
     header h1 {
-        color: #000000;
+        color: whitesmoke;
     }
 
     nav a {
-        color: #000000;
+        color: whitesmoke;
     }
-
-    .blog h2 {
-        color: #000000;
+    
+    .btn {
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #3c3535;
+        background-color: rgb(38, 36, 33);
+        cursor: pointer;
     }
-
-    .blog a {
-        color: #000000;
-    }
-
-    footer a {
-        color: #000000;
+    .btn a {
+        color: whitesmoke;
     }
 }
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #1c1c1c;
+        background-color: rgb(35, 31, 31);
         color: #ffffff;
     }
 
     header h1 {
-        color: #ffffff;
+        color: white;
     }
 
     nav a {
         color: #ffffff;
     }
-
-    .blog h2 {
-        color: #ffffff;
-    }
-
-    .blog a {
-        color: #ffffff;
-    }
-
-    footer a {
-        color: #ffffff;
+    .btn {
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        background-color: whitesmoke;
+        cursor: pointer;
     }
 }
