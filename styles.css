@@ -1,97 +1,71 @@
 /* Common styles for both light and dark modes */
 body {
-    font-family: Arial, sans-serif;
+    font-family: consolas;
     margin: 0;
     padding: 0;
 }
 
 header {
     padding: 20px;
+    padding-left:5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    background-image:url('background.png'); 
+    flex-wrap: wrap; 
+    /*background-image: url(background.png);*/
     background-size:fixed; 
     background-position: centre;
     background-attachment: fixed;
-    color: white;
     
 }
 header h1 {
     margin: 0;
+    font-family: consolas;
 }
 
 nav a {
     text-decoration: none;
     margin-left: 15px;
+    padding-right: 5%;
 }
-
+nav a:hover {
+    color:purple;
+}
 main {
-    padding: 20px;
+    max-width: 800px; 
+    margin: auto;
+    padding-left: 5%;
+    padding-right: 3%;
+    text-align: left; 
+    align-self: center;
 }
-
 .blog {
-    margin-bottom: 40px;
-}
-
-footer {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-footer a {
-    text-decoration: none;
-    margin: 0 10px;
+    margin-bottom: 4px;
+    
 }
 
 /* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
-        background-color: whitesmoke;
+        background-color: #ffffff;
         color :black;
     }
 
-    header h1 {
-        color: whitesmoke;
+    nav a {
+        color: black;
     }
 
-    nav a {
-        color: whitesmoke;
-    }
-    
-    .btn {
-        padding: 10px;
-        font-size: 1em;
-        border: 1px solid #3c3535;
-        background-color: rgb(38, 36, 33);
-        cursor: pointer;
-    }
-    .btn a {
-        color: whitesmoke;
-    }
 }
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: rgb(35, 31, 31);
+        background-color:#1e1f21;
         color: #ffffff;
-    }
-
-    header h1 {
-        color: white;
     }
 
     nav a {
         color: #ffffff;
     }
-    .btn {
-        padding: 10px;
-        font-size: 1em;
-        border: 1px solid #ccc;
-        background-color: whitesmoke;
-        cursor: pointer;
-    }
+
 }
