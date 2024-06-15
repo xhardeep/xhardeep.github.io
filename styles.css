@@ -1,13 +1,15 @@
 /* Common styles for both light and dark modes */
+
+
 body {
-    font-family: consolas;
+    font-family:Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 header {
     padding: 20px;
-    padding-left: 20px;
+    padding-left:20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,7 +22,7 @@ header {
 }
 header h1 {
     margin: 0;
-    font-family: consolas;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 nav a {
