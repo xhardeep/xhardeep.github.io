@@ -40,13 +40,22 @@ main {
     padding-right: 3%;
     text-align: left; 
     align-self: center;
+    font-size: large;
 }
 .blog {
     margin-bottom: 4px;
     
 }
-
-/* Light mode styles */
+.bloglink:hover{
+    color: purple;
+}
+.img{
+    width: -webkit-fill-available;
+    border-radius: 2%;
+}
+    
+    
+    /* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
         background-color: #ffffff;
