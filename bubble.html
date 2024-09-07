@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bursting Bubble Todo List</title>
+    <style>
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --container-bg: white;
+            --input-border: #ccc;
+            --button-bg: #3b82f6;
+            --button-text: white;
+        }
+
+        .dark-mode {
+            --bg-color: #1a1a1a;
+            --text-color: #f0f0f0;
+            --container-bg: #2a2a2a;
+            --input-border: #444;
+            --button-bg: #4b5563;
+            --button-text: #f0f0f0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--container-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #todo-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        #todo-input, #difficulty-select, #add-button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid var(--input-border);
+            border-radius: 4px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        #add-button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #add-button:hover {
+            opacity: 0.9;
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 10px;
+            box-sizing: border-box;
+            text-align: center;
+            word-wrap: break-word;
+            font-size: 12px;
+            color: var(--text-color);
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .bubble:hover {
+            transform: scale(1.05);
+        }
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 16px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .delete-btn:hover {
+            opacity: 1;
+        }
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        #theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 {
+                font-size: 20px;
+            }
+            #todo-input, #difficulty-select, #add-button {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            #todo-form {
+                flex-direction: row;
+            }
+            #todo-input {
+                flex-grow: 1;
+            }
+            #difficulty-select {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle">🌓</button>
+    <div class="container">
+        <h1>Bursting Bubble Todo List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Enter a new todo" required>
+            <select id="difficulty-select">
+                <option value="very easy">Very Easy</option>
+                <option value="easy">Easy</option>
+                <option value="hard">Hard</option>
+                <option value="super hard">Super Hard</option>
+            </select>
+            <button type="submit" id="add-button">Add</button>
+        </form>
+    </div>
+
+    <script>
+        const difficulties = {
+          'very easy': { size: 80, color: 'hsla(300, 100%, 50%, 0.7)' },
+            'easy': { size: 100, color: 'hsla(120, 100%, 50%, 1.0)' },
+            'hard': { size: 120, color: 'hsla(240, 100%, 50%, 0.7)' },
+            'super hard': { size: 140, color: 'hsla(0, 100%, 25%, 1.0)' }
+        };
+
+        let todos = [];
+
+        function addTodo(event) {
+            event.preventDefault();
+            const todoText = document.getElementById('todo-input').value.trim();
+            const difficulty = document.getElementById('difficulty-select').value;
+
+            if (todoText) {
+                const newTodo = {
+                    id: Date.now(),
+                    text: todoText,
+                    difficulty,
+                    position: getRandomPosition(difficulty)
+                };
+                todos.push(newTodo);
+                createBubble(newTodo);
+                document.getElementById('todo-input').value = '';
+            }
+        }
+
+        function getRandomPosition(difficulty) {
+            const size = difficulties[difficulty].size;
+            return {
+                x: Math.random() * (window.innerWidth - size),
+                y: Math.random() * (window.innerHeight - size - 100) + 100 // Offset to avoid overlapping with the form
+            };
+        }
+
+        function createBubble(todo) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.id = `todo-${todo.id}`;
+            bubble.style.width = `${difficulties[todo.difficulty].size}px`;
+            bubble.style.height = `${difficulties[todo.difficulty].size}px`;
+            bubble.style.backgroundColor = difficulties[todo.difficulty].color;
+            bubble.style.left = `${todo.position.x}px`;
+            bubble.style.top = `${todo.position.y}px`;
+            bubble.innerHTML = `
+                ${todo.text}
+                <button class="delete-btn" onclick="deleteTodo(event, ${todo.id})">×</button>
+            `;
+            bubble.onclick = () => burstBubble(todo.id);
+            document.body.appendChild(bubble);
+        }
+
+        function burstBubble(id) {
+            const bubble = document.getElementById(`todo-${id}`);
+            const rect = bubble.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+
+            // Create particle explosion
+            for (let i = 0; i < 20; i++) {
+                createParticle(centerX, centerY, difficulties[todos.find(t => t.id === id).difficulty].color);
+            }
+
+            // Remove the bubble
+            bubble.remove();
+            todos = todos.filter(todo => todo.id !== id);
+        }
+
+        function createParticle(x, y, color) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = `${Math.random() * 8 + 2}px`;
+            particle.style.height = particle.style.width;
+            particle.style.backgroundColor = color;
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            document.body.appendChild(particle);
+
+            const angle = Math.random() * Math.PI * 2;
+            const speed = Math.random() * 200 + 100;
+            const vx = Math.cos(angle) * speed;
+            const vy = Math.sin(angle) * speed;
+            const lifetime = Math.random() * 1000 + 500;
+
+            let start = null;
+            function animate(timestamp) {
+                if (!start) start = timestamp;
+                const progress = timestamp - start;
+                
+                const newX = x + vx * (progress / 1000);
+                const newY = y + vy * (progress / 1000) + 0.5 * 980 * Math.pow(progress / 1000, 2);
+                
+                particle.style.left = `${newX}px`;
+                particle.style.top = `${newY}px`;
+                particle.style.opacity = 1 - progress / lifetime;
+
+                if (progress < lifetime) {
+                    requestAnimationFrame(animate);
+                } else {
+                    particle.remove();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        function deleteTodo(event, id) {
+            event.stopPropagation();
+            const bubble = document.getElementById(`todo-${id}`);
+            bubble.remove();
+            todos = todos.filter(todo => todo.id !== id);
+        }
+
+        function moveBubbles() {
+            todos.forEach(todo => {
+                const bubble = document.getElementById(`todo-${todo.id}`);
+                if (bubble) {
+                    todo.position.x += (Math.random() - 0.5) * 2;
+                    todo.position.y += (Math.random() - 0.5) * 2;
+                    
+                    // Keep bubbles within the viewport
+                    todo.position.x = Math.max(0, Math.min(todo.position.x, window.innerWidth - difficulties[todo.difficulty].size));
+                    todo.position.y = Math.max(100, Math.min(todo.position.y, window.innerHeight - difficulties[todo.difficulty].size));
+                    
+                    bubble.style.left = `${todo.position.x}px`;
+                    bubble.style.top = `${todo.position.y}px`;
+                }
+            });
+        }
+
+        function handleResize() {
+            todos.forEach(todo => {
+                const bubble = document.getElementById(`todo-${todo.id}`);
+                if (bubble) {
+                    const newPosition = getRandomPosition(todo.difficulty);
+                    todo.position = newPosition;
+                    bubble.style.left = `${newPosition.x}px`;
+                    bubble.style.top = `${newPosition.y}px`;
+                }
+            });
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeToggle = document.getElementById('theme-toggle');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌓';
+        }
+
+        document.getElementById('todo-form').addEventListener('submit', addTodo);
+        window.addEventListener('resize', handleResize);
+        document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+        setInterval(moveBubbles, 50);
+
+        // Check for user's preferred color scheme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            toggleTheme();
+        }
+    </script>
+</body>
+</html>
