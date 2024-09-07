@@ -1,82 +1,128 @@
-/* Common styles for both light and dark modes */
-
+:root {
+    --main-bg-color-light: #ffffff;
+    --main-bg-color-dark: #1c1c1c;
+    --main-text-color-light: #000000;
+    --main-text-color-dark: #ffffff;
+    --accent-color: #ff0066;
+}
 
 body {
-    font-family:Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 header {
     padding: 20px;
-    padding-left:20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; 
-    /*background-image: url(background.png);*/
-    background-size:fixed; 
-    background-position: centre;
-    background-attachment: fixed;
-    
 }
+
 header h1 {
     margin: 0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-size:2.5ch;
 }
 
 nav a {
     text-decoration: none;
     margin-left: 15px;
-    padding-right: 5%;
 }
-nav a:hover {
-    color:purple;
-}
+
 main {
-    max-width: 800px; 
-    margin: auto;
-    padding-left: 5%;
-    padding-right: 3%;
-    text-align: left; 
-    align-self: center;
-    font-size: large;
+    padding: 20px;
 }
-.blog {
-    margin-bottom: 4px;
-    
+
+.podcast-episode {
+    margin-bottom: 40px;
 }
-.bloglink:hover{
-    color: purple;
+
+.podcast-episode p {
+    font-size: 1.1em;
+    line-height: 1.5em;
 }
-.img{
-    width: -webkit-fill-available;
-    border-radius: 2%;
+
+.podcast-episode span {
+    display: block;
+    margin: 10px 0;
 }
-    
-    
-    /* Light mode styles */
+
+.podcast-episode a {
+    text-decoration: none;
+}
+
+footer {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+footer a {
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+/* Light mode styles */
 @media (prefers-color-scheme: light) {
     body {
         background-color: #ffffff;
-        color :black;
+        color: #000000;
+    }
+
+    header h1 {
+        color:black;
     }
 
     nav a {
         color: black;
     }
 
+    .podcast-episode h2 {
+        color: black;
+    }
+
+    .podcast-episode a {
+        color: black;
+    }
+
+    footer a {
+        color: black;
+    }
 }
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color:#1e1f21;
+        background-color: #1c1c1c;
         color: #ffffff;
+    }
+
+    header h1 {
+        color:white;
     }
 
     nav a {
-        color: #ffffff;
+        color: white;
     }
 
+    .podcast-episode h2 {
+        color: white;
+    }
+
+    .podcast-episode a {
+        color: white;
+    }
+
+    footer a {
+        color: white;
+    }
+}
+
+main {
+    max-width: 800px; /* Set a maximum width */
+    margin: auto; /* Center the main section horizontally and vertically */
+    padding: 20px; /* Add padding for spacing */
+    text-align: left; /* Align text to the left */
+    align-self: center;
+    font-size: 1.6ch;
 }
