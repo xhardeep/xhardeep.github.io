@@ -3,7 +3,7 @@
     --main-bg-color-dark: #1c1c1c;
     --main-text-color-light: #000000;
     --main-text-color-dark: #ffffff;
-    --accent-color: #ff0066;
+    --accent-color: purple;
 }
 
 body {
@@ -125,4 +125,15 @@ main {
     text-align: left; /* Align text to the left */
     align-self: center;
     font-size: 1.6ch;
+}
+/* General styling for links */
+a {
+    text-decoration: underline; /* Forces all links to be underlined */
+    color:purple; /* Keeps the original text color */
+}
+
+/* If you want to add specific styling for hover effect */
+a:hover {
+    text-decoration: underline; /* Ensures underline remains on hover */
+    color: var(--accent-color); /* Optional: Change link color on hover */
 }
