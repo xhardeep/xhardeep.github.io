@@ -80,12 +80,6 @@ const {
           element.dataset.value = element.innerText;
         }
         
-        // Lock width to prevent layout shifts
-        const rect = element.getBoundingClientRect();
-        element.style.minWidth = `${rect.width}px`;
-        element.style.display = 'inline-block';
-        element.style.whiteSpace = 'nowrap';
-        
         let interval = null;
         let timeout = null;
 
@@ -107,7 +101,7 @@ const {
             
             if(iteration >= element.dataset.value.length){ 
               clearInterval(interval);
-              element.innerText = element.dataset.value; // Force final value
+              element.innerText = element.dataset.value;
             }
             
             iteration += 1;
@@ -116,18 +110,18 @@ const {
           timeout = setTimeout(() => {
             clearInterval(interval);
             element.innerText = element.dataset.value;
-          }, 2000); // Reduced safety net for faster recovery
+          }, 2000);
         };
         
         element.addEventListener("mouseover", startAnimation);
 
         if (element.classList.contains('matrix-text')) {
-          setInterval(startAnimation, 8000); // Increased interval for less distraction
+          setInterval(startAnimation, 10000); // Very subtle heartbeat
         }
       };
 
-      // Apply to site title and all H1s
-      document.querySelectorAll('.matrix-text, h1, .post-title').forEach(setupMatrixAnimation);
+      // Apply ONLY to site title name
+      document.querySelectorAll('.matrix-text').forEach(setupMatrixAnimation);
     </script>
 	</body>
 </html>
