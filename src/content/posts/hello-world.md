@@ -25,4 +25,8 @@ YouTube:
 @@https://www.youtube.com/watch?v=dQw4w9WgXcQ@@
 
 Spotify:
-@@https://open.spotify.com/track/4PTG3ST6TMz6ThpBr9Iqy6@@
+@@https://open.spotify.com/track/1QJbDTZAO8rpGOMG4UahFM?si=4d015eb77e5f4d74@@
+
+Custom Iframe:
+@@<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1QJbDTZAO8rpGOMG4UahFM?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>@@
+@@https://open.spotify.com/track/1QJbDTZAO8rpGOMG4UahFM?si=4d015eb77e5f4d74@@ 
