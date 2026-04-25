@@ -72,7 +72,7 @@ a:hover {
 
 /* Header Styles */
 .site-header {
-  padding: 35px var(--wp--custom--gap--horizontal);
+  padding: 35px 0;
 }
 
 .site-header .container-wide {
@@ -118,8 +118,8 @@ a:hover {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 30px;
-  height: 21px;
+  width: 24px;
+  height: 16px;
   background: none;
   border: none;
   cursor: pointer;
@@ -158,13 +158,13 @@ a:hover {
   }
   
   .menu-toggle.is-active span:nth-child(1) {
-    transform: translateY(9.5px) rotate(45deg);
+    transform: translateY(7px) rotate(45deg);
   }
   .menu-toggle.is-active span:nth-child(2) {
     opacity: 0;
   }
   .menu-toggle.is-active span:nth-child(3) {
-    transform: translateY(-9.5px) rotate(-45deg);
+    transform: translateY(-7px) rotate(-45deg);
   }
 }
 
@@ -208,7 +208,7 @@ a:hover {
 }
 
 .post-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1.1;
   margin: 10px 0;
 }
