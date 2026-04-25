@@ -145,7 +145,7 @@ a:hover {
 .menu-toggle span {
   width: 100%;
   height: 2px;
-  background-color: #ffffff;
+  background-color: var(--wp--preset--color--foreground);
   transition: all 0.3s ease;
 }
 
@@ -241,7 +241,8 @@ a:hover {
 
 .post-title {
   font-size: 3rem;
-  line-height: 1.1;
+  line-height: 1.2;
+  min-height: 1.2em; /* Stabilize height for animation */
   margin: 10px 0;
 }
 
