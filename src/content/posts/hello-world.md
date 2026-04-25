@@ -19,3 +19,10 @@ You can use standard Markdown features like:
 - [Links](https://astro.build)
 
 Enjoy!
+
+### Embed Tests
+YouTube:
+@@https://www.youtube.com/watch?v=dQw4w9WgXcQ@@
+
+Spotify:
+@@https://open.spotify.com/track/4PTG3ST6TMz6ThpBr9Iqy6@@
