@@ -1,0 +1,30 @@
+{
+  "name": "xhardeep.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xhardeep/xhardeep.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/xhardeep/xhardeep.github.io/issues"
+  },
+  "homepage": "https://github.com/xhardeep/xhardeep.github.io#readme",
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.4",
+    "@astrojs/sitemap": "^3.7.2",
+    "astro": "^6.1.9"
+  }
+}

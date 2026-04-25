@@ -1,0 +1,44 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+  description?: string;
+}
+
+const { title, description = "A blog by xhardeep" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<header class="site-header">
+      <div class="container-wide">
+        <div class="site-title">
+          <a href="/">XHARDEEP</a>
+        </div>
+        <nav>
+          <!-- Navigation can be added here -->
+        </nav>
+      </div>
+    </header>
+    
+    <div style="height: 50px;"></div>
+
+		<slot />
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; {new Date().getFullYear()} xhardeep. Built with Astro & Spearhead.</p>
+      </div>
+    </footer>
+	</body>
+</html>
