@@ -81,10 +81,12 @@ const {
         }
         
         let interval = null;
-        
-        element.addEventListener("mouseover", () => {
+        let timeout = null;
+
+        const startAnimation = () => {
           let iteration = 0;
           clearInterval(interval);
+          clearTimeout(timeout);
           
           interval = setInterval(() => {
             element.innerText = element.innerText
@@ -101,9 +103,22 @@ const {
               clearInterval(interval);
             }
             
-            iteration += 1 / 2; // Faster shuffle
+            iteration += 1 / 2;
           }, 30);
-        });
+
+          // 5-second safety net to ensure original text returns
+          timeout = setTimeout(() => {
+            clearInterval(interval);
+            element.innerText = element.dataset.value;
+          }, 5000);
+        };
+        
+        element.addEventListener("mouseover", startAnimation);
+
+        // Periodic glitch every 5 seconds for "Hardeep" name
+        if (element.classList.contains('matrix-text')) {
+          setInterval(startAnimation, 5000);
+        }
       };
 
       // Apply to site title and all H1s
