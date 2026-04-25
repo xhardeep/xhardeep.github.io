@@ -1,26 +1,27 @@
 import { visit } from 'unist-util-visit';
+import { toString } from 'mdast-util-to-string';
 
 export function remarkEmbed() {
   return (tree) => {
-    visit(tree, 'text', (node, index, parent) => {
+    visit(tree, 'paragraph', (node) => {
+      // Get the full text content of the paragraph
+      const text = toString(node);
       const regex = /@@(.+?)@@/g;
-      const matches = node.value.match(regex);
 
-      if (matches) {
-        const children = [];
-        let lastIndex = 0;
-
-        node.value.replace(regex, (match, url, offset) => {
-          // Add text before the match
-          if (offset > lastIndex) {
-            children.push({
-              type: 'text',
-              value: node.value.slice(lastIndex, offset),
-            });
-          }
-
-          // Create the embed node
+      if (regex.test(text)) {
+        // Reset regex index
+        regex.lastIndex = 0;
+        
+        const newChildren = [];
+        let currentText = '';
+        
+        // This is a simplified approach: if a paragraph ONLY contains the embed, replace it
+        // If it contains other text, we'll need a more complex replacement
+        // For now, let's handle the case where the embed is on its own line/paragraph
+        if (text.startsWith('@@') && text.endsWith('@@')) {
+          const url = text.slice(2, -2);
           let html = '';
+          
           if (url.includes('youtube.com') || url.includes('youtu.be')) {
             const videoId = url.includes('watch?v=') 
               ? url.split('watch?v=')[1].split('&')[0] 
@@ -35,25 +36,10 @@ export function remarkEmbed() {
             html = `<a href="${url}" target="_blank">${url}</a>`;
           }
 
-          children.push({
-            type: 'html',
-            value: html,
-          });
-
-          lastIndex = offset + match.length;
-        });
-
-        // Add remaining text
-        if (lastIndex < node.value.length) {
-          children.push({
-            type: 'text',
-            value: node.value.slice(lastIndex),
-          });
+          node.type = 'html';
+          node.value = html;
+          node.children = [];
         }
-
-        // Replace the current node with the new children
-        parent.children.splice(index, 1, ...children);
-        return index + children.length;
       }
     });
   };
