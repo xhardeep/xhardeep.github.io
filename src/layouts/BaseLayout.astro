@@ -25,6 +25,11 @@ const { title, description = "A blog by xhardeep" } = Astro.props;
         <div class="site-title">
           <a href="/">Hardeep</a>
         </div>
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <nav class="site-nav">
           <a href="/archive">Archive</a>
           <a href="https://x.com/xhardeep" target="_blank" rel="noopener noreferrer">Twitter</a>
@@ -36,6 +41,14 @@ const { title, description = "A blog by xhardeep" } = Astro.props;
 
 		<slot />
 
-
+    <script>
+      const menuToggle = document.querySelector('.menu-toggle');
+      const siteNav = document.querySelector('.site-nav');
+      
+      menuToggle?.addEventListener('click', () => {
+        siteNav?.classList.toggle('is-active');
+        menuToggle?.classList.toggle('is-active');
+      });
+    </script>
 	</body>
 </html>

@@ -24,8 +24,8 @@
   :root {
     --wp--preset--color--primary: #db0042;
     --wp--preset--color--secondary: #B2B2B2;
-    --wp--preset--color--foreground: #e0e0e0;
-    --wp--preset--color--header: #ffffff;
+    --wp--preset--color--foreground: #ffffff;
+    --wp--preset--color--header: #B2B2B2;
     --wp--preset--color--background: #1E1F21;
   }
 }
@@ -35,7 +35,7 @@ body {
   background-color: var(--wp--preset--color--background);
   color: var(--wp--preset--color--foreground);
   font-family: var(--wp--preset--font-family--libre-franklin);
-  font-size: 1.125rem;
+  font-size: 1.05rem;
   line-height: 1.8;
   margin: 0;
   padding: 0;
@@ -88,7 +88,7 @@ a:hover {
 }
 
 .site-title a {
-  color: var(--wp--preset--color--header, var(--wp--preset--color--primary));
+  color: var(--wp--preset--color--primary);
 }
 
 .site-title a:hover {
@@ -106,12 +106,66 @@ a:hover {
 }
 
 .site-nav a {
-  color: var(--wp--preset--color--header, var(--wp--preset--color--foreground));
+  color: var(--wp--preset--color--header, var(--wp--preset--color--secondary));
 }
 
 .site-nav a:hover {
   color: var(--wp--preset--color--primary);
   text-decoration: none;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    background-color: var(--wp--preset--color--background);
+    padding: 20px var(--wp--custom--gap--horizontal);
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 5;
+  }
+
+  .site-nav.is-active {
+    display: flex;
+  }
+  
+  .menu-toggle.is-active span:nth-child(1) {
+    transform: translateY(9.5px) rotate(45deg);
+  }
+  .menu-toggle.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.is-active span:nth-child(3) {
+    transform: translateY(-9.5px) rotate(-45deg);
+  }
 }
 
 /* Post List */
