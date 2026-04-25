@@ -1,6 +1,6 @@
 /* Design Tokens from Spearhead Theme */
 :root {
-  --wp--preset--color--primary: #db0042;
+  --wp--preset--color--primary: #30bf17;
   --wp--preset--color--secondary: #555555;
   --wp--preset--color--foreground: #000000;
   --wp--preset--color--background: #ffffff;
@@ -22,7 +22,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --wp--preset--color--primary: #db0042;
+  --wp--preset--color--primary: #30bf17;
     --wp--preset--color--secondary: #B2B2B2;
     --wp--preset--color--foreground: #ffffff;
     --wp--preset--color--header: #B2B2B2;
@@ -46,6 +46,18 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+}
+
+h1, .post-title, .site-title a {
+  font-family: var(--wp--preset--font-family--ibm-plex-mono);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+h1:hover, .post-title:hover, .site-title a:hover {
+  color: var(--wp--preset--color--primary);
+  text-shadow: 0 0 12px var(--wp--preset--color--primary);
 }
 
 a {
