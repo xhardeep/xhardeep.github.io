@@ -89,10 +89,13 @@ a:hover {
 
 .site-title a {
   color: var(--wp--preset--color--primary);
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
 }
 
 .site-title a:hover {
-  color: var(--wp--preset--color--secondary);
+  color: var(--wp--preset--color--primary);
+  text-shadow: 0 0 10px var(--wp--preset--color--primary);
   text-decoration: none;
 }
 
