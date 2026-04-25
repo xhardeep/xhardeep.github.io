@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const sortedPosts = allPosts.sort(
+	(a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const postsByYear = sortedPosts.reduce((acc, post) => {
+	const year = post.data.date.getFullYear();
+	if (!acc[year]) {
+		acc[year] = [];
+	}
+	acc[year].push(post);
+	return acc;
+}, {} as Record<number, typeof allPosts>);
+
+const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Archive | Hardeep">
+	<main class="container">
+		<h1 class="page-title">Archive</h1>
+		
+		{years.map((year) => (
+			<section class="archive-year-section">
+				<h2 class="archive-year">{year}</h2>
+				<ul class="archive-list">
+					{postsByYear[Number(year)].map((post) => (
+						<li class="archive-item">
+							<span class="archive-date">
+								{post.data.date.toLocaleDateString('en-US', {
+									month: 'short',
+									day: 'numeric',
+								})}
+							</span>
+							<a href={`/posts/${post.id}/`} class="archive-link">
+								{post.data.title}
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		))}
+	</main>
+</BaseLayout>
+
+<style>
+	.page-title {
+		margin-bottom: 2rem;
+	}
+	.archive-year-section {
+		margin-bottom: 3rem;
+	}
+	.archive-year {
+		font-family: var(--wp--preset--font-family--ibm-plex-mono);
+		font-size: 2rem;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+		padding-bottom: 0.5rem;
+		margin-bottom: 1.5rem;
+	}
+	.archive-list {
+		list-style: none;
+		padding: 0;
+	}
+	.archive-item {
+		display: flex;
+		gap: 2rem;
+		margin-bottom: 1rem;
+		align-items: baseline;
+	}
+	.archive-date {
+		font-family: var(--wp--preset--font-family--ibm-plex-mono);
+		color: var(--wp--preset--color--secondary);
+		min-width: 80px;
+		font-size: 0.9rem;
+		text-transform: uppercase;
+	}
+	.archive-link {
+		font-size: 1.25rem;
+		font-weight: 500;
+		color: var(--wp--preset--color--foreground);
+	}
+	.archive-link:hover {
+		color: var(--wp--preset--color--primary);
+		text-decoration: none;
+	}
+
+  @media (prefers-color-scheme: dark) {
+    .archive-year {
+      border-bottom-color: rgba(255,255,255,0.1);
+    }
+  }
+</style>

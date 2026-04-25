@@ -95,6 +95,24 @@ a:hover {
   text-decoration: none;
 }
 
+.site-nav {
+  display: flex;
+  gap: 20px;
+  font-family: var(--wp--preset--font-family--ibm-plex-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.site-nav a {
+  color: var(--wp--preset--color--foreground);
+}
+
+.site-nav a:hover {
+  color: var(--wp--preset--color--primary);
+  text-decoration: none;
+}
+
 /* Post List */
 .post-list {
   list-style: none;

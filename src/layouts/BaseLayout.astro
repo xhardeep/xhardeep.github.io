@@ -23,10 +23,11 @@ const { title, description = "A blog by xhardeep" } = Astro.props;
 		<header class="site-header">
       <div class="container-wide">
         <div class="site-title">
-          <a href="/">XHARDEEP</a>
+          <a href="/">Hardeep</a>
         </div>
-        <nav>
-          <!-- Navigation can be added here -->
+        <nav class="site-nav">
+          <a href="/archive">Archive</a>
+          <a href="https://x.com/xhardeep" target="_blank" rel="noopener noreferrer">Twitter</a>
         </nav>
       </div>
     </header>
@@ -35,10 +36,6 @@ const { title, description = "A blog by xhardeep" } = Astro.props;
 
 		<slot />
 
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; {new Date().getFullYear()} xhardeep. Built with Astro & Spearhead.</p>
-      </div>
-    </footer>
+
 	</body>
 </html>
