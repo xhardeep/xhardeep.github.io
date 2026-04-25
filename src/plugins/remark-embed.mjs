@@ -4,24 +4,30 @@ import { toString } from 'mdast-util-to-string';
 export function remarkEmbed() {
   return (tree) => {
     visit(tree, 'paragraph', (node) => {
-      // Get the full text content of the paragraph
-      const text = toString(node);
       const regex = /@@(.+?)@@/g;
-
-      if (regex.test(text)) {
-        // Reset regex index
-        regex.lastIndex = 0;
+      
+      // We'll iterate through children and find matches
+      // This is a bit tricky with mixed nodes (text and links)
+      // So we'll convert the whole paragraph to a string and check for matches
+      const content = toString(node);
+      
+      if (regex.test(content)) {
+        // If we found matches, we'll transform the whole paragraph into HTML nodes
+        // This is the most reliable way to handle mixed content with embeds
+        const children = [];
+        let lastIndex = 0;
         
-        const newChildren = [];
-        let currentText = '';
-        
-        // This is a simplified approach: if a paragraph ONLY contains the embed, replace it
-        // If it contains other text, we'll need a more complex replacement
-        // For now, let's handle the case where the embed is on its own line/paragraph
-        if (text.startsWith('@@') && text.endsWith('@@')) {
-          const url = text.slice(2, -2);
-          let html = '';
+        content.replace(regex, (match, url, offset) => {
+          // Add text before the match
+          if (offset > lastIndex) {
+            children.push({
+              type: 'html',
+              value: content.slice(lastIndex, offset)
+            });
+          }
           
+          // Create the embed HTML
+          let html = '';
           if (url.includes('youtube.com') || url.includes('youtu.be')) {
             const videoId = url.includes('watch?v=') 
               ? url.split('watch?v=')[1].split('&')[0] 
@@ -35,11 +41,25 @@ export function remarkEmbed() {
           } else {
             html = `<a href="${url}" target="_blank">${url}</a>`;
           }
-
-          node.type = 'html';
-          node.value = html;
-          node.children = [];
+          
+          children.push({
+            type: 'html',
+            value: html
+          });
+          
+          lastIndex = offset + match.length;
+        });
+        
+        // Add remaining text
+        if (lastIndex < content.length) {
+          children.push({
+            type: 'html',
+            value: content.slice(lastIndex)
+          });
         }
+        
+        // Update the node
+        node.children = children;
       }
     });
   };
