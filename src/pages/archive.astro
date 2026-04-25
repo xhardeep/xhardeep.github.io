@@ -29,12 +29,6 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 				<ul class="archive-list">
 					{postsByYear[Number(year)].map((post) => (
 						<li class="archive-item">
-							<span class="archive-date">
-								{post.data.date.toLocaleDateString('en-US', {
-									month: 'short',
-									day: 'numeric',
-								})}
-							</span>
 							<a href={`/posts/${post.id}/`} class="archive-link">
 								{post.data.title}
 							</a>

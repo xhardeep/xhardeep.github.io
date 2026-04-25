@@ -118,8 +118,8 @@ a:hover {
   display: none;
   flex-direction: column;
   justify-content: space-between;
-  width: 24px;
-  height: 16px;
+  width: 20px;
+  height: 12px;
   background: none;
   border: none;
   cursor: pointer;
@@ -135,6 +135,10 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .site-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
   .menu-toggle {
     display: flex;
   }
@@ -158,13 +162,13 @@ a:hover {
   }
   
   .menu-toggle.is-active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
+    transform: translateY(5px) rotate(45deg);
   }
   .menu-toggle.is-active span:nth-child(2) {
     opacity: 0;
   }
   .menu-toggle.is-active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
+    transform: translateY(-5px) rotate(-45deg);
   }
 }
 
