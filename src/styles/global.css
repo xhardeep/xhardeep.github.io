@@ -26,16 +26,21 @@
     --wp--preset--color--secondary: #B2B2B2;
     --wp--preset--color--foreground: #ffffff;
     --wp--preset--color--header: #B2B2B2;
-    --wp--preset--color--background: #1E1F21;
+    --wp--preset--color--background: #0f1113;
+    --grid-color: rgba(48, 191, 23, 0.03);
   }
 }
 
-/* Base Styles */
+/* Cyber Background */
 body {
   background-color: var(--wp--preset--color--background);
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 30px 30px;
   color: var(--wp--preset--color--foreground);
-  font-family: var(--wp--preset--font-family--libre-franklin);
-  font-size: 1.125rem;
+  font-family: 'Newsreader', serif; /* More premium feel */
+  font-size: 1.15rem;
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -94,9 +99,26 @@ a:hover {
 }
 
 .site-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--wp--preset--font-family--ibm-plex-mono);
   font-size: 1.375rem;
   font-weight: 700;
+}
+
+.site-title::after {
+  content: '● ONLINE';
+  font-size: 0.65rem;
+  color: var(--wp--preset--color--primary);
+  letter-spacing: 2px;
+  opacity: 0.8;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
 }
 
 .site-title a {
@@ -232,7 +254,14 @@ a:hover {
 }
 
 .post-item {
-  margin-bottom: 60px;
+  margin-bottom: 80px;
+  padding-left: 25px;
+  border-left: 1px solid rgba(48, 191, 23, 0.1);
+  transition: border-left 0.3s ease;
+}
+
+.post-item:hover {
+  border-left: 1px solid var(--wp--preset--color--primary);
 }
 
 .post-item-title {
@@ -303,10 +332,40 @@ a:hover {
 
 /* Footer */
 .site-footer {
-  padding: 60px 0;
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin-top: 80px;
-  text-align: center;
-  font-size: 0.875rem;
+  padding: 40px 0;
+  border-top: 1px solid rgba(48, 191, 23, 0.1);
+  margin-top: 100px;
+  font-family: var(--wp--preset--font-family--ibm-plex-mono);
+  font-size: 0.75rem;
   color: var(--wp--preset--color--secondary);
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.system-status {
+  display: flex;
+  gap: 15px;
+  color: var(--wp--preset--color--primary);
+  letter-spacing: 1px;
+}
+
+#current-time {
+  opacity: 0.6;
+}
+
+.copyright {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    flex-direction: column;
+    text-align: center;
+  }
 }
