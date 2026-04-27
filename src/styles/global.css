@@ -31,16 +31,21 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Cyber Background */
 body {
+  overflow-x: hidden;
   background-color: var(--wp--preset--color--background);
   background-image: 
     linear-gradient(var(--grid-color) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
   background-size: 30px 30px;
   color: var(--wp--preset--color--foreground);
-  font-family: 'Newsreader', serif; /* More premium feel */
-  font-size: 1.15rem;
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  font-size: 1.125rem;
   line-height: 1.6;
   margin: 0;
   padding: 0;
@@ -220,15 +225,17 @@ a:hover {
 
   .site-nav {
     display: none;
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 60px;
     left: 0;
     width: 100%;
+    height: calc(100vh - 60px);
     background-color: var(--wp--preset--color--background);
-    padding: 20px var(--wp--custom--gap--horizontal);
+    padding: 40px var(--wp--custom--gap--horizontal);
     flex-direction: column;
-    gap: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    align-items: center;
+    gap: 30px;
+    border-bottom: 1px solid rgba(48, 191, 23, 0.1);
     z-index: 5;
   }
 
