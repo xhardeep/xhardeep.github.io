@@ -9,6 +9,11 @@ const posts = (await getCollection('posts')).sort(
 
 <BaseLayout title="Hardeep | Blog">
 	<main class="container">
+    <div class="podcast-bar">
+      <span class="podcast-label">Podcast</span>
+      <a href="https://open.spotify.com/show/55eSxT2jmp7cNsekMoX1oO?si=dc0452fa0e774b75" class="podcast-link" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a href="https://youtube.com/@xhardeep" class="podcast-link" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
 		<ul class="post-list">
 			{
 				posts.map((post) => (

@@ -36,12 +36,13 @@ body {
   color: var(--wp--preset--color--foreground);
   font-family: var(--wp--preset--font-family--libre-franklin);
   font-size: 1.125rem;
-  line-height: 1.8;
+  line-height: 1.6;
   margin: 0;
   padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--wp--preset--font-family--ibm-plex-mono);
   font-weight: 700;
   line-height: 1.2;
   margin-top: 1.5em;
@@ -51,7 +52,6 @@ h1, h2, h3, h4, h5, h6 {
 h1, .post-title, .site-title a {
   font-family: var(--wp--preset--font-family--ibm-plex-mono);
   letter-spacing: 1px;
-  text-transform: uppercase;
   transition: all 0.3s ease;
 }
 
@@ -127,6 +127,31 @@ a:hover {
 .site-nav a:hover {
   color: var(--wp--preset--color--primary);
   text-decoration: none;
+}
+
+/* Podcast Bar */
+.podcast-bar {
+  display: flex;
+  gap: 15px;
+  font-family: var(--wp--preset--font-family--ibm-plex-mono);
+  font-size: 0.85rem;
+  margin-bottom: 40px;
+  color: var(--wp--preset--color--secondary);
+}
+
+.podcast-label {
+  text-transform: none;
+  font-weight: 400;
+}
+
+.podcast-link {
+  color: var(--wp--preset--color--primary);
+  font-weight: 700;
+}
+
+.podcast-link:hover {
+  text-decoration: underline;
+  text-shadow: 0 0 8px var(--wp--preset--color--primary);
 }
 
 .menu-toggle {
