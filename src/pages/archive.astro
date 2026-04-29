@@ -22,13 +22,20 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 <BaseLayout title="Archive | Hardeep">
 	<main class="container">
 		<h1 class="page-title">Archive</h1>
+
+    <div class="search-container">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="archive-search" placeholder="Search..." aria-label="Search archive" />
+      </div>
+    </div>
 		
 		{years.map((year) => (
-			<section class="archive-year-section">
+			<section class="archive-year-section" data-year={year}>
 				<h2 class="archive-year">{year}</h2>
 				<ul class="archive-list">
 					{postsByYear[Number(year)].map((post) => (
-						<li class="archive-item">
+						<li class="archive-item" data-search-content={`${post.data.title} ${post.body}`.toLowerCase()}>
 							<a href={`/posts/${post.id}/`} class="archive-link">
 								{post.data.title}
 							</a>
@@ -40,13 +47,81 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 	</main>
 </BaseLayout>
 
+<script>
+  const searchInput = document.getElementById('archive-search') as HTMLInputElement;
+  const yearSections = document.querySelectorAll('.archive-year-section');
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+    
+    yearSections.forEach((section) => {
+      const items = section.querySelectorAll('.archive-item');
+      let visibleCount = 0;
+
+      items.forEach((item) => {
+        const searchableText = (item as HTMLElement).dataset.searchContent || '';
+        if (searchableText.includes(query)) {
+          (item as HTMLElement).style.display = 'flex';
+          visibleCount++;
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+
+      // Hide the entire year section if no items are visible
+      (section as HTMLElement).style.display = visibleCount > 0 ? 'block' : 'none';
+    });
+  });
+</script>
+
 <style>
 	.page-title {
-		margin-bottom: 2rem;
+		margin-bottom: 1.5rem;
 	}
+  .search-container {
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  .search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+  }
+  .search-wrapper:focus-within {
+    border-color: var(--wp--preset--color--primary);
+    box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.1);
+  }
+  .search-icon {
+    font-size: 0.9rem;
+    margin-right: 10px;
+    opacity: 0.5;
+  }
+  #archive-search {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--wp--preset--color--foreground);
+    width: 100%;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  #archive-search::placeholder {
+    color: var(--wp--preset--color--secondary);
+    opacity: 0.7;
+  }
 	.archive-year-section {
 		margin-bottom: 3rem;
 	}
+  @media (prefers-color-scheme: dark) {
+    .search-wrapper {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
 	.archive-year {
 		font-family: var(--wp--preset--font-family--ibm-plex-mono);
 		font-size: 2rem;

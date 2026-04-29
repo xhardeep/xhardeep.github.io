@@ -24,7 +24,7 @@
   :root {
     --wp--preset--color--primary: #61afef;
     --wp--preset--color--secondary: #5c6370;
-    --wp--preset--color--foreground: #abb2bf;
+    --wp--preset--color--foreground: #ced4de;
     --wp--preset--color--header: #abb2bf;
     --wp--preset--color--background: #282c34;
   }
@@ -96,7 +96,7 @@ a:hover {
 
 /* Header Styles */
 .site-header {
-  padding: 35px 0;
+  padding: 15px 0;
 }
 
 .site-header .container-wide {
@@ -248,7 +248,7 @@ a:hover {
 }
 
 .post-item {
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .post-item-title {
