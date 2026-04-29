@@ -48,22 +48,23 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--wp--preset--font-family--libre-franklin);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.3;
-  margin-top: 2em;
-  margin-bottom: 0.8em;
+  margin-top: 1.8em;
+  margin-bottom: 0.6em;
+  color: var(--wp--preset--color--foreground);
 }
 
-h1 { color: #e06c75; font-size: 2.5rem; }
-h2 { color: #98c379; font-size: 2rem; }
-h3 { color: #d19a66; font-size: 1.75rem; }
-h4 { color: #61afef; font-size: 1.5rem; }
-h5 { color: #c678dd; font-size: 1.25rem; }
-h6 { color: #56b6c2; font-size: 1.1rem; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.35rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.15rem; }
+h6 { font-size: 1.05rem; }
 
 h1, .post-title, .site-title a {
-  font-family: var(--wp--preset--font-family--ibm-plex-mono);
-  letter-spacing: 1px;
+  font-family: var(--wp--preset--font-family--libre-franklin);
+  letter-spacing: -0.02em;
   transition: all 0.3s ease;
 }
 
@@ -280,9 +281,8 @@ a:hover {
 }
 
 .post-title {
-  font-size: 3rem;
-  line-height: 1.2;
-  min-height: 1.2em; /* Stabilize height for animation */
+  font-size: 1.85rem;
+  line-height: 1.25;
   margin: 10px 0;
 }
 
