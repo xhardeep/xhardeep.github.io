@@ -25,8 +25,11 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
     <div class="search-container">
       <div class="search-wrapper">
-        <span class="search-icon">🔍</span>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         <input type="text" id="archive-search" placeholder="Search..." aria-label="Search archive" />
+        <button id="search-clear" class="search-clear" aria-label="Clear search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
     </div>
 		
@@ -49,11 +52,10 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
 <script>
   const searchInput = document.getElementById('archive-search') as HTMLInputElement;
+  const searchClear = document.getElementById('search-clear') as HTMLButtonElement;
   const yearSections = document.querySelectorAll('.archive-year-section');
 
-  searchInput?.addEventListener('input', (e) => {
-    const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
-    
+  const filterPosts = (query: string) => {
     yearSections.forEach((section) => {
       const items = section.querySelectorAll('.archive-item');
       let visibleCount = 0;
@@ -68,9 +70,23 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
         }
       });
 
-      // Hide the entire year section if no items are visible
       (section as HTMLElement).style.display = visibleCount > 0 ? 'block' : 'none';
     });
+    
+    // Toggle clear button visibility
+    if (searchClear) {
+      searchClear.style.display = query.length > 0 ? 'flex' : 'none';
+    }
+  };
+
+  searchInput?.addEventListener('input', (e) => {
+    filterPosts((e.target as HTMLInputElement).value.toLowerCase().trim());
+  });
+
+  searchClear?.addEventListener('click', () => {
+    searchInput.value = '';
+    filterPosts('');
+    searchInput.focus();
   });
 </script>
 
@@ -85,20 +101,38 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
   .search-wrapper {
     display: flex;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
-    padding: 8px 12px;
+    background: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
     transition: all 0.3s ease;
   }
   .search-wrapper:focus-within {
-    border-color: var(--wp--preset--color--primary);
-    box-shadow: 0 0 0 2px rgba(97, 175, 239, 0.1);
+    border-bottom-color: var(--wp--preset--color--primary);
   }
   .search-icon {
-    font-size: 0.9rem;
-    margin-right: 10px;
-    opacity: 0.5;
+    width: 16px;
+    height: 16px;
+    margin-right: 12px;
+    opacity: 0.4;
+  }
+  .search-clear {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    opacity: 0.4;
+    color: var(--wp--preset--color--foreground);
+    transition: opacity 0.2s;
+  }
+  .search-clear:hover {
+    opacity: 0.8;
+  }
+  .search-clear svg {
+    width: 14px;
+    height: 14px;
   }
   #archive-search {
     background: none;
@@ -106,20 +140,19 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
     outline: none;
     color: var(--wp--preset--color--foreground);
     width: 100%;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-family: inherit;
   }
   #archive-search::placeholder {
     color: var(--wp--preset--color--secondary);
-    opacity: 0.7;
+    opacity: 0.6;
   }
 	.archive-year-section {
 		margin-bottom: 3rem;
 	}
   @media (prefers-color-scheme: dark) {
     .search-wrapper {
-      background-color: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.1);
+      border-bottom-color: rgba(255, 255, 255, 0.15);
     }
   }
 	.archive-year {
