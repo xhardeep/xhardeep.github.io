@@ -40,8 +40,8 @@ body {
   background-color: var(--wp--preset--color--background);
   color: var(--wp--preset--color--foreground);
   font-family: var(--wp--preset--font-family--libre-franklin);
-  font-size: 1.125rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.55;
   margin: 0;
   padding: 0;
 }
@@ -55,12 +55,12 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--wp--preset--color--foreground);
 }
 
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.35rem; }
-h4 { font-size: 1.25rem; }
-h5 { font-size: 1.15rem; }
-h6 { font-size: 1.05rem; }
+h1 { font-size: 1.6rem; }
+h2 { font-size: 1.4rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.15rem; }
+h5 { font-size: 1.05rem; }
+h6 { font-size: 1rem; }
 
 h1, .post-title, .site-title a {
   font-family: var(--wp--preset--font-family--libre-franklin);
@@ -281,8 +281,9 @@ a:hover {
 }
 
 .post-title {
-  font-size: 1.85rem;
-  line-height: 1.25;
+  font-size: 1.7rem;
+  font-weight: 700;
+  line-height: 1.3;
   margin: 10px 0;
 }
 

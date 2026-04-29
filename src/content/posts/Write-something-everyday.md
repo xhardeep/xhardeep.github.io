@@ -1,12 +1,12 @@
 ---
 title: "Write something everyday"
-description: "Write something every day no matter if someone reads it or not. Get your Idea onto paper. It will make you clear thinker. Clear thinking lead you to good judgement which leads you to better results."
+description: "Write something every day no matter if someone reads it or not. Get your Idea onto paper."
 date: "2026-04-25"
 ---
 
- ## Write something everyday
+## Write something everyday
 
- Write something every day no matter if someone reads it or not. Get your Idea onto paper. It will make you clear thinker. Clear thinking lead you to good judgement which leads you to better results.
+Write something every day no matter if someone reads it or not. Get your Idea onto paper. It will make you clear thinker. Clear thinking lead you to good judgement which leads you to better results.
 
 In today social media is everyone is watching and consuming content which make your attention span lower and people can’t think critically. They believe the narrative and go with it rather than to think and analyze their ideas. Below are the some things which improve with writing.
 @@https://substackcdn.com/image/fetch/$s_!WjTG!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc4335956-128c-440c-b0b9-8b77896d5025_1477x481.png@@
