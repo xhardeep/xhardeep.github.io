@@ -26,7 +26,7 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
     <link rel="canonical" href={canonicalURL} />
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -46,7 +46,7 @@ const {
 		<header class="site-header">
       <div class="container-wide">
         <div class="site-title">
-          <a href="/" class="matrix-text" data-value="Hardeep">Hardeep</a>
+          <a href="/">Hardeep</a>
         </div>
         <button class="menu-toggle" aria-label="Toggle menu">
           <span></span>
@@ -64,32 +64,9 @@ const {
 
 		<slot />
 
-    <footer class="site-footer">
-      <div class="container-wide">
-        <div class="footer-grid">
-          <div class="system-status">
-            <span class="matrix-text" data-value="SYSTEM: ACTIVE">SYSTEM: ACTIVE</span>
-            <span id="current-time"></span>
-          </div>
-          <div class="copyright">
-            &copy; {new Date().getFullYear()} Hardeep. All rights reserved.
-          </div>
-        </div>
-      </div>
-    </footer>
+
 
     <script>
-      // Update time
-      function updateTime() {
-        const timeElement = document.getElementById('current-time');
-        if (timeElement) {
-          const now = new Date();
-          timeElement.innerText = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        }
-      }
-      setInterval(updateTime, 1000);
-      updateTime();
-
       const menuToggle = document.querySelector('.menu-toggle');
       const siteNav = document.querySelector('.site-nav');
       
@@ -97,57 +74,6 @@ const {
         siteNav?.classList.toggle('is-active');
         menuToggle?.classList.toggle('is-active');
       });
-
-      // AniMe Matrix Subtle Shuffle Effect
-      const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-      
-      const setupMatrixAnimation = (element) => {
-        if (!element.dataset.value) {
-          element.dataset.value = element.innerText;
-        }
-        
-        let interval = null;
-        let timeout = null;
-
-        const startAnimation = () => {
-          let iteration = 0;
-          clearInterval(interval);
-          clearTimeout(timeout);
-          
-          interval = setInterval(() => {
-            element.innerText = element.dataset.value
-              .split("")
-              .map((letter, index) => {
-                if(index < iteration) {
-                  return element.dataset.value[index];
-                }
-                return letters[Math.floor(Math.random() * 44)]
-              })
-              .join("");
-            
-            if(iteration >= element.dataset.value.length){ 
-              clearInterval(interval);
-              element.innerText = element.dataset.value;
-            }
-            
-            iteration += 1;
-          }, 30);
-
-          timeout = setTimeout(() => {
-            clearInterval(interval);
-            element.innerText = element.dataset.value;
-          }, 2000);
-        };
-        
-        element.addEventListener("mouseover", startAnimation);
-
-        if (element.classList.contains('matrix-text')) {
-          setInterval(startAnimation, 10000); // Very subtle heartbeat
-        }
-      };
-
-      // Apply ONLY to site title name
-      document.querySelectorAll('.matrix-text').forEach(setupMatrixAnimation);
     </script>
 	</body>
 </html>
