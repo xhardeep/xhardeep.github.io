@@ -1,0 +1,59 @@
+---
+title: "Understanding Simple Harmonic Motion"
+description: "An interactive exploration of springs, masses, and the cosine function using scroll-driven Svelte diagrams."
+date: "2026-06-18"
+---
+
+import HarmonicOscillator from '../../components/demos/HarmonicOscillator.svelte';
+
+Simple Harmonic Motion (SHM) is one of the most fundamental concepts in physics. It describes any system where a restoring force is directly proportional to displacement, pulling the object back toward its equilibrium state. 
+
+In this interactive post, we will explore the simplest realization of this concept: **a mass suspended from a spring**.
+
+## The Physical System
+
+Imagine a spring hanging vertically from a fixed support. When we attach a mass to the bottom and let it rest, the spring stretches to its equilibrium position. This is the point where the upward pull of the spring ($F_s = -kx$) exactly balances the downward pull of gravity ($F_g = mg$).
+
+If we pull the mass downward or push it upward and release it, it begins to oscillate. 
+
+### Interactive Visualizer
+
+Try scrolling the page to scrub through time, or switch the mode below to **Auto-Play** or **Manual** to inspect the motion. Note how the height of the mass matches the height of the wave graph on the right.
+
+<HarmonicOscillator client:visible />
+
+## The Mathematics of the Oscillation
+
+Why does the mass draw a perfect cosine wave? We can derive this directly from Newton's Second Law ($F = ma$) and Hooke's Law ($F = -kx$).
+
+{"$$m \\frac{d^2x}{dt^2} = -kx$$"}
+
+Rewriting this second-order differential equation:
+
+{"$$\\frac{d^2x}{dt^2} + \\frac{k}{m} x = 0$$"}
+
+If we define the angular frequency {"$\\omega = \\sqrt{\\frac{k}{m}}$"}, the equation becomes:
+
+{"$$\\frac{d^2x}{dt^2} + \\omega^2 x = 0$$"}
+
+The general analytical solution to this equation is:
+
+$$x(t) = A \cos(\omega t + \phi)$$
+
+Where:
+- $A$ is the **amplitude** (how far we pulled the mass initially).
+- $\omega$ is the **angular frequency** (how fast it cycles, determined by the spring stiffness $k$ and mass $m$).
+- $\phi$ is the **phase angle** (setting the starting position at $t=0$).
+
+In our simulation, we set the amplitude {"$A = 60\\text{px}$"}, the frequency {"$f = 0.25\\text{Hz}$"} (giving a period {"$T = 4\\text{s}$"}), and the phase $\phi = 0$.
+
+## Key Insights
+
+1. **Velocity and Acceleration:** 
+   When the displacement is maximum ($x = \pm A$), the spring is stretched or compressed the most. The acceleration is at its peak, but the velocity is zero for a brief instant as the mass changes direction.
+2. **Equilibrium Crossings:** 
+   When the mass passes through the center point ($x = 0$), the force on it is zero, but its velocity is at its maximum. Its momentum carries it right past equilibrium into the next phase of compression or stretch.
+3. **Determinism:**
+   Because this motion is governed by a simple trigonometric equation, we can calculate the exact position at any time $t$ without needing numerical approximations. This analytical model ensures that when you scroll up and down, the system moves deterministically without any numerical drift or rounding errors.
+
+Feel free to play with the controls above or scroll the page to see the relationship in action!
